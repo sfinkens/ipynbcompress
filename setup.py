@@ -32,7 +32,7 @@ setup(
         'Pillow',
         'jsonschema',
         'ipython',
-        'climate',
+        #'climate',
         'hurry.filesize'
     ],
     license='MIT',

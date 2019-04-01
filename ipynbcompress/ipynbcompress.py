@@ -48,11 +48,16 @@ def compress(filename, output_filename=None, img_width=2048, img_format='png'):
                 io_img = BytesIO(bytes_img)
                 img = Image.open(io_img)
                 factor = float(img_width) / img.size[0]
+                new_size = img.size
                 if factor < 1:
                     # only resize large images
                     new_size = [int(s*factor+0.5) for s in img.size]
                     img = img.resize(new_size)
                 out = BytesIO()
+                if img.mode == 'RGBA':
+                    bgimg = Image.new('RGBA', new_size, (255, 255, 255, 255))
+                    bgimg.paste(img, mask=img)
+                    img = bgimg.convert('RGB')
                 img.save(out, img_format)
                 out.seek(0)
                 mime = 'image/' + img_format
