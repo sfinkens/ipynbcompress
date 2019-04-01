@@ -44,7 +44,7 @@ def main(filename, output_filename=None, img_width=2048, img_format='jpg'):
             from_to = filename
             output_filename = filename
 
-        if saved > 100000:
+        if saved > 10000:
             copyfile(temp_filename, output_filename)
             saved = size(saved, system=verbose)
             print('%s: %s decrease' % (from_to, saved))
